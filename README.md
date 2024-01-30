@@ -1,19 +1,18 @@
-# <p style="text-align: center;">  🌌️Fuzz4All: Universal Fuzzing with Large Language Models </p>
+# <p style="text-align: center;">  🌌️Fuzz4All: Universal Fuzzing with LLMs </p>
 
 <p align="center">
     <a href="https://arxiv.org/abs/2308.04748"><img src="https://img.shields.io/badge/arXiv-2308.04748-b31b1b.svg?style=for-the-badge">
-    <a href="https://doi.org/10.5281/zenodo.10456883"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.10456883-blue?style=for-the-badge">
-    <a href="https://hub.docker.com/r/stevenxia/fuzz4all/tags"><img src="https://img.shields.io/badge/docker-stevenxia%2Ffuzz4all-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=blue">
+    <a href="https://doi.org/10.5281/zenodo.10456883"><img src="https://img.shields.io/badge/DOI-10456883-blue?style=for-the-badge">
+    <a href="https://hub.docker.com/r/stevenxia/fuzz4all/tags"><img src="https://img.shields.io/badge/docker-fuzz4all-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=blue">
     <a href="https://github.com/fuzz4all/fuzz4all/blob/master/LICENSE"><img src="https://forthebadge.com/images/badges/cc-by.svg" style="height: 28px"></a>
 </p>
 
+This repository contains the source code for our ICSE'24 paper <i> "Fuzz4All: Universal Fuzzing with Large Language Models" </i>
 
+## 🌌️ About
 
-## About
-
-Fuzz4All -- the first fuzzer that can universally target many input languages and features of these languages. 
-> [!Note]
-> The key idea behind Fuzz4All is to leverage large language models (LLMs) as an input generation and mutation engine, which enables the 
+`Fuzz4All` -- the first fuzzer that can universally target many input languages and features of these languages.
+> The key idea behind `Fuzz4All` is to leverage large language models (LLMs) as an input generation and mutation engine, which enables the 
 > approach to produce diverse and realistic inputs for any practically relevant language. 
 
 To realize this potential, we present a novel **autoprompting technique**, which creates LLM prompts 
@@ -27,7 +26,7 @@ the prompt to create new fuzzing inputs.
 ## ⚡ Quick Start
 
 > [!Important]
-> We highly recommend running Fuzz4All on a sandbox environment/machine such as docker. 
+> We highly recommend running `Fuzz4All` in a sandbox environment/machine such as docker. 
 > Since LLMs may generate potential harmful code your machine, please proceed with caution.
 > We have provided a complete docker image in our artifact here: https://doi.org/10.5281/zenodo.10456883
 
@@ -54,7 +53,7 @@ export FUZZING_DEVICE="gpu"
 The exact parameters will depend on the machine you are running `Fuzz4All` on.
 
 > [!Note]
-> Currently Fuzz4All only supports starcoderbase and starcoderbase-1b models. However, one can easily modify 
+> Currently `Fuzz4All` only supports starcoderbase and starcoderbase-1b models. However, one can easily modify 
 > the source code to include and use other models. See `model.py` for more detail.
 
 To use the autoprompting mechanism of `Fuzz4All` via GPT-4, please also export your openai key
@@ -169,7 +168,7 @@ as well as how to produce the complete results from our paper
 
 ## 🐛 Bugs Found
 
-We have included a complete list of bugs found by `Fuzz4All` under `bugs/` folder, feel 
+We have included a complete list of bugs found by `Fuzz4All` under `bugs/` folder.
 
 ## 📝 Citation
 
