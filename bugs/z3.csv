@@ -1,0 +1,73 @@
+  ,fixed,confirmed,duplicated,unconfirmed,won't fix,status,symptom,short desc,long desc,reported to,,our version
+Z3,1,1,,,,Fixed,crash,,"ASSERTION VIOLATION
+File: ../src/ast/datatype_decl_plugin.cpp
+Line: 676
+is_datatype(s)",https://github.com/Z3Prover/z3/issues/6677,,
+Z3,1,1,,,,Fixed,crash,,"ASSERTION VIOLATION
+File: ../src/parsers/smt2/smt2parser.cpp
+Line: 375
+ex.has_pos()",https://github.com/Z3Prover/z3/issues/6680,,
+Z3,,,,,1,Closed due to fuzzing,crash,,"ASSERTION VIOLATION
+File: ../src/ast/datatype_decl_plugin.cpp
+Line: 41
+n == get_def().params().size()",https://github.com/Z3Prover/z3/issues/6685,,
+Z3,1,1,,,,Fixed,segfaults,,"(error ""line 9 column 28: unknown constant fib-even (Int) "")
+Segmentation fault (core dumped)",https://github.com/Z3Prover/z3/issues/6713,,
+Z3,1,1,,,,Fixed,crash,,"ASSERTION VIOLATION
+File: ../src/ast/array_decl_plugin.cpp
+Line: 318
+UNEXPECTED CODE WAS REACHED.",https://github.com/Z3Prover/z3/issues/6714,,
+Z3,1,1,,,,Fixed,segfaults,,Segmentation fault (core dumped),https://github.com/Z3Prover/z3/issues/6746,,
+Z3,1,1,,,,Fixed (by 12),segfaults,,Segmentation fault (core dumped),https://github.com/Z3Prover/z3/issues/6747,,
+Z3,1,1,,,,Fixed,crash,,"sat
+(
+)
+unknown
+ASSERTION VIOLATION
+File: ../src/smt/theory_array_base.cpp
+Line: 972
+ctx.is_relevant(n)
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A",https://github.com/Z3Prover/z3/issues/6749,,
+Z3,1,1,,,,Fixed,crash,,"sat
+ASSERTION VIOLATION
+File: ../src/util/vector.h
+Line: 474
+idx < size()
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A",https://github.com/Z3Prover/z3/issues/6757,,
+Z3,1,1,,,,Fixed,crash,,"(error ""line 5 column 8: unknown constant b"")
+ASSERTION VIOLATION
+File: ../src/solver/assertions/asserted_formulas.cpp
+Line: 159
+m.is_bool(e)
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A",https://github.com/Z3Prover/z3/issues/6766,,
+Z3,1,1,,,,Fixed,crash,,"ASSERTION VIOLATION
+File: ../src/ast/rewriter/rewriter_def.h
+Line: 331
+m_r->get_sort() == t->get_sort()
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A",https://github.com/Z3Prover/z3/issues/6802,,
+Z3,,,,,1,Closed due to fuzzing,crash,,"ASSERTION VIOLATION
+File: ../src/cmd_context/pdecl.cpp
+Line: 166
+idx < num_params
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A",https://github.com/Z3Prover/z3/issues/6818,,
+Z3,1,1,,,,Fixed,crash,,"Asserting this expression twice in a row:
+ false
+ASSERTION VIOLATION
+File: ../src/qe/qsat.cpp
+Line: 580
+false
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A""",https://github.com/Z3Prover/z3/issues/6955,,
+Z3,1,1,,,,Fixed,crash,,"ASSERTION VIOLATION
+File: ../src/smt/smt_internalizer.cpp
+Line: 1112
+b_internalized(n)
+(C)ontinue, (A)bort, (S)top, (T)hrow exception, Invoke (G)DB
+A",https://github.com/Z3Prover/z3/issues/6956,,
+,,,,,,,,,,,,
+,12,12,0,0,2,14,,,,,,

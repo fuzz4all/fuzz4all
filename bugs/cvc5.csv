@@ -1,0 +1,53 @@
+,fixed,confirmed,duplicated,unconfirmed,won't fix,status,symptom,short desc,long desc,reported to,,our version
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within cvc5::internal::FloatingPointSize::FloatingPointSize(uint32_t, uint32_t) at /home/steven/cvc5/src/util/floatingpoint_size.cpp:25
+Check failure
+
+ validSignificandSize(sig_size)
+
+Aborted (core dumped)",https://github.com/cvc5/cvc5/issues/9655,,
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within cvc5::Sort cvc5::internal::parser::SymbolTable::Implementation::lookupType(const std::string&, const std::vector<cvc5::Sort>&) const at /home/steven/cvc5/src/parser/symbol_table.cpp:489
+Check failure
+
+ p.first.size() == params.size()
+type constructor arity is wrong: `Int' requires 0 parameters but was provided 1
+Aborted (core dumped)",https://github.com/cvc5/cvc5/issues/9656,,
+CVC5,,,1,,,Duplicated,crash,,"Fatal failure within cvc5::Term cvc5::parser::Smt2TermParser::parseTerm() at /home/steven/cvc5/src/parser/smt2/smt2_term_parser.cpp:239
+Check failure
+
+ xstack.back() == ParseCtx::NEXT_ARG || xstack.back() == ParseCtx::CLOSURE_NEXT_ARG
+
+Aborted (core dumped)",https://github.com/cvc5/cvc5/issues/9651,,
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within cvc5::Term cvc5::parser::Smt2TermParser::parseTerm() at /home/steven/cvc5/src/parser/smt2/smt2_term_parser.cpp:133
+Check failure
+
+ !ret.isNull()
+
+Aborted (core dumped)",https://github.com/cvc5/cvc5/issues/9665,,
+CVC5,,,1,,,Duplicated,crash,,"Fatal failure within static void cvc5::internal::symfpuLiteral::traits::invariant(const prop&) at /home/steven/cvc5/src/util/floatingpoint_literal_symfpu_traits.cpp:415
+Check failure
+
+ p
+
+Aborted (core dumped)",https://github.com/cvc5/cvc5/issues/9716,,
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within cvc5::parser::GetValueCommand::GetValueCommand(const std::vector<cvc5::Term>&) at /home/cvc5/src/parser/api/cpp/command.cpp:1283
+Check failure
+
+ terms.size() >= 1
+cannot get-value of an empty set of terms
+Aborted (core dumped)",https://github.com/cvc5/cvc5/issues/9849,,
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within static size_t cvc5::internal::theory::strings::Word::getLength(cvc5::internal::TNode) at /home/cvc5/src/theory/strings/word.cpp:90
+Unimplemented code encountered Word::getLength on 2
+Aborted",https://github.com/cvc5/cvc5/issues/10093,,
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within static cvc5::internal::Node cvc5::internal::theory::strings::Word::mkEmptyWord(cvc5::internal::TypeNode) at /home/cvc5/src/theory/strings/word.cpp:40
+Unimplemented code encountered
+Aborted",https://github.com/cvc5/cvc5/issues/10094,,
+CVC5,1,1,,,,Fixed,crash,,"Fatal failure within cvc5::internal::Node cvc5::internal::theory::strings::StringsEntail::inferEqsFromContains(cvc5::internal::Node, cvc5::internal::Node) at /home/cvc5/src/theory/strings/strings_entail.cpp:914
+Check failure
+
+ x.getType() == y.getType()
+
+Aborted",https://github.com/cvc5/cvc5/issues/10101,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,7,7,2,0,0,9,,,,,,

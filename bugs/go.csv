@@ -1,0 +1,16 @@
+  ,fixed,confirmed,duplicated,unconfirmed,won't fix,status,symptom,short desc,long desc,reported to,,our version
+go,,,1,,,duplicated,internal compiler error,cmd/compile: min/max builtins trigger mayCall ICE,,https://github.com/golang/go/issues/60582,,https://go.dev/play/p/TAggd5aUk00?v=gotip
+go,,,1,,,duplicated,panic: ,"cmd/go: ""loadPackageData called with empty package path"" build panic",,https://github.com/golang/go/issues/60686,,https://go.dev/play/p/P2iv3ERVhbb
+go,1,1,,,,fixed,segmentation,runtime: ReadMemStats crashes with segmentation violation,,https://github.com/golang/go/issues/61158,,
+go,1,1,,,,fixed,internal compiler error,unsafe: internal compiler error in unaligned pointer write,,https://github.com/golang/go/issues/61187,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,2,2,2,0,0,4,,,,,,

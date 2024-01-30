@@ -1,0 +1,83 @@
+  ,fixed,confirmed,duplicated,unconfirmed,won't fix,status,symptom,short desc,long desc,reported to,,our version
+clang++,,,1,,,duplicated,Segmentation fault,Clang crashes on incorrect code with -std=c++17 with vectors as templates,,https://github.com/llvm/llvm-project/issues/57495,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on invalid code when using typeid,"clang++: /root/llvm-project/clang/include/clang/AST/DeclCXX.h:452:
+clang::CXXRecordDecl::DefinitionData& clang::CXXRecordDecl::data() const:
+Assertion `DD && ""queried property of class with no definition""' failed.",https://github.com/llvm/llvm-project/issues/63242,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on invalid code when using some built-in type traits,"clang++: /root/llvm-project/llvm/include/llvm/Support/Casting.h:578:
+decltype(auto) llvm::cast(From*) [with To = clang::FunctionTemplateDecl; From = clang::NamedDecl]:
+Assertion `isa<To>(Val) && ""cast<Ty>() argument of incompatible type!""' failed.",https://github.com/llvm/llvm-project/issues/63243,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on invalid code in template-parameter-list,"clang++: /root/llvm-project/clang/lib/AST/RecordLayoutBuilder.cpp:3295: 
+const clang::ASTRecordLayout& clang::ASTContext::getASTRecordLayout(const clang::RecordDecl*) const: 
+Assertion `D && ""Cannot get layout of forward declarations!""' failed.",https://github.com/llvm/llvm-project/issues/63244,,
+clang++,,,1,,,duplicated,Segmentation fault,Clang frontend C++ crash on invalid code when missing std::enable_if argument,"clang++: /root/llvm-project/llvm/include/llvm/Support/Casting.h:578: 
+decltype(auto) llvm::cast(From*) [with To = clang::FunctionTemplateDecl; From = clang::NamedDecl]: 
+Assertion `isa<To>(Val) && ""cast<Ty>() argument of incompatible type!""' failed.",https://github.com/llvm/llvm-project/issues/63246,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on recursive constexpr,,https://github.com/llvm/llvm-project/issues/63249,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on redefinition of monostate,,https://github.com/llvm/llvm-project/issues/63250,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on invalid redefinition of alias,"clang++: /root/llvm-project/clang/include/clang/AST/Type.h:752: 
+const clang::ExtQualsTypeCommonBase* clang::QualType::getCommonPtr() const:
+Assertion `!isNull() && ""Cannot retrieve a NULL type pointer""' failed.",https://github.com/llvm/llvm-project/issues/63253,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash when using declaration refers to its own class c++20 and above,"clang++: /root/llvm-project/clang/lib/Sema/SemaTemplate.cpp:291: 
+clang::TemplateNameKind clang::Sema::isTemplateName(clang::Scope*, clang::CXXScopeSpec&, bool, const clang::UnqualifiedId&, clang::ParsedType, bool, clang::Sema::TemplateTy&, bool&, bool): 
+Assertion `!FoundUsingShadow || FoundUsingShadow->getTargetDecl() == TD' failed.",https://github.com/llvm/llvm-project/issues/63254,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on decltype in lambda params,"#7 0x0000564e26fc435e (anonymous namespace)::CXXNameMangler::mangleLocalName(clang::GlobalDecl, llvm::SmallVector<llvm::StringRef, 4u> const*) ItaniumMangle.cpp:0:0
+  #8 0x0000564e26fc5141 (anonymous namespace)::CXXNameMangler::mangleNameWithAbiTags(clang::GlobalDecl, llvm::SmallVector<llvm::StringRef, 4u> const*) ItaniumMangle.cpp:0:0
+  #9 0x0000564e26fc5d3a (anonymous namespace)::CXXNameMangler::mangleName(clang::GlobalDecl) ItaniumMangle.cpp:0:0",https://github.com/llvm/llvm-project/issues/63271,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on auto in non-static struct member,"#4 0x0000559904f8ce20 clang::Expr::IgnoreParens() (/opt/compiler-explorer/clang-assertions-trunk/bin/clang+++0x74a3e20)
+ #5 0x00005599041bb104 clang::Sema::AddInitializerToDecl(clang::Decl*, clang::Expr*, bool) (/opt/compiler-explorer/clang-assertions-trunk/bin/clang+++0x66d2104)
+ #6 0x0000559903e7ce86 clang::Parser::ParseDeclarationAfterDeclaratorAndAttributes(clang::Declarator&, clang::Parser::ParsedTemplateInfo const&, clang::Parser::ForRangeInit*) (/opt/compiler-explorer/clang-assertions-trunk/bin/clang+++0x6393e86)",https://github.com/llvm/llvm-project/issues/63278,,
+clang++,,,1,,,duplicated,Segmentation fault,requires clause for wrapped lambda causes ICE,"clang++: /root/llvm-project/clang/lib/Sema/SemaTemplateInstantiate.cpp:4087:
+llvm::PointerUnion<clang::Decl*, llvm::SmallVector<clang::VarDecl*, 4>*>* clang::LocalInstantiationScope::findInstantiationOf(const clang::Decl*): 
+Assertion `isa<LabelDecl>(D) && ""declaration not instantiated in this scope""' failed.",https://github.com/llvm/llvm-project/issues/62591,,https://gcc.godbolt.org/z/n7K6sqoa5
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash on referencing undeclared member during class initialization,"clang++: /root/llvm-project/clang/lib/AST/ExprConstant.cpp:2355: 
+bool CheckEvaluationResult(CheckEvaluationResultKind, {anonymous}::EvalInfo&, clang::SourceLocation, clang::QualType, const clang::APValue&, clang::ConstantExprKind, const clang::FieldDecl*, CheckedTemporaries&): 
+Assertion `SubobjectDecl && ""SubobjectDecl shall be non-null""' failed.",https://github.com/llvm/llvm-project/issues/63496,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash when using std::numeric_limits without header,"clang++: /root/llvm-project/clang/lib/AST/RecordLayoutBuilder.cpp:3294: 
+const clang::ASTRecordLayout& clang::ASTContext::getASTRecordLayout(const clang::RecordDecl*) const: 
+Assertion `D && ""Cannot get layout of forward declarations!""' failed.",https://github.com/llvm/llvm-project/issues/63497,,
+clang++,,,1,,,duplicated,Segmentation fault,Crash at -O0 on x86_64-linux_gnu: Assertion `isa<T>(CanonicalType)' failed.,"clang-17: /zdata/shaoli/compilers/ccbuilder-repos/llvm-project/clang/include/clang/AST/Type.h:7520:
+const T* clang::Type::castAs() const [with T = clang::FunctionProtoType]:
+Assertion `isa<T>(CanonicalType)' failed.",https://github.com/llvm/llvm-project/issues/63324,,https://gcc.godbolt.org/z/4zErjW6hG
+clang++,,,1,,,duplicated,Segmentation fault,"Assertion `!T->isDependentType() && ""should not see dependent types here""' failed.","clang++: /root/build/tools/clang/include/clang/AST/TypeNodes.inc:73: 
+clang::TypeInfo clang::ASTContext::getTypeInfoImpl(const clang::Type*) const: 
+Assertion `!T->isDependentType() && ""should not see dependent types here""' failed.",https://github.com/llvm/llvm-project/issues/29886,,https://gcc.godbolt.org/z/or688nWj6
+clang++,,,1,,,duplicated,Segmentation fault,"clang crashes in clang/lib/AST/ExprConstant.cpp:14737 Assertion `!isValueDependent() && ""Expression evaluator can't be called on a dependent expression.""' failed","clang-13: /home/haoxin/haoxin-data/dut-research/compilers/llvm-project/clang/lib/AST/ExprConstant.cpp:14737: 
+bool clang::Expr::EvaluateAsInt(clang::Expr::EvalResult&, const clang::ASTContext&, clang::Expr::SideEffectsKind, bool) const: 
+Assertion `!isValueDependent() && ""Expression evaluator can't be called on a dependent expression.""' failed.",https://github.com/llvm/llvm-project/issues/49570,,https://gcc.godbolt.org/z/vfKqjof3W
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash when initializing a large vector,"clang++: /root/llvm-project/clang/lib/AST/ExprConstant.cpp:3437: 
+void expandArray(clang::APValue&, unsigned int): 
+Assertion `Index < Size' failed.",https://github.com/llvm/llvm-project/issues/63562,,
+clang++,1,1,,,,fixed,Segmentation fault,Clang frontend C++ crash when casting string to char[],"successful failed overload
+UNREACHABLE executed at /root/llvm-project/clang/lib/Sema/SemaCast.cpp:469!",https://github.com/llvm/llvm-project/issues/63758,,
+clang++,,,1,,,duplicated,Segmentation fault,Instantiated local in inner and outer scopes,"clang++: /root/llvm-project/clang/lib/Sema/SemaTemplateInstantiate.cpp:4181: 
+void clang::LocalInstantiationScope::InstantiatedLocal(const clang::Decl*, clang::Decl*): 
+Assertion `Current->LocalDecls.find(D) == Current->LocalDecls.end() && ""Instantiated local in inner and outer scopes""' failed.",https://github.com/llvm/llvm-project/issues/39106,,https://gcc.godbolt.org/z/oxhKEen1b
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ with an incompletely initialized variable,"unhandled decl kind
+UNREACHABLE executed at /root/llvm-project/clang/lib/Sema/SemaExpr.cpp:18362!",https://github.com/llvm/llvm-project/issues/64949,,
+clang++,,,1,,,duplicated,Segmentation fault,Clang frontend C++ crash when lambda returns array type with undeclared identifier,"clang++: /root/llvm-project/clang/lib/Sema/SemaChecking.cpp:16737: 
+bool clang::Sema::CheckParmsForFunctionDef(llvm::ArrayRef<clang::ParmVarDecl*>, bool): 
+Assertion `Param && ""null in a parameter list""' failed.",https://github.com/llvm/llvm-project/issues/64962,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash with initializer and using,"clang++: /root/llvm-project/clang/lib/AST/Decl.cpp:2943: 
+clang::Expr* clang::ParmVarDecl::getDefaultArg(): 
+Assertion `!hasUninstantiatedDefaultArg() && ""Default argument is not yet instantiated!""' failed.",https://github.com/llvm/llvm-project/issues/65057,,
+clang++,,,1,,,duplicated,Segmentation fault,"Crash on release. Assertion `Val & & ""isa<> used on a null pointer""' failed.","clang++: /root/llvm-project/llvm/include/llvm/Support/Casting.h:109: 
+static bool llvm::isa_impl_cl<To, const From*>::doit(const From*) [with To = clang::ImplicitValueInitExpr; From = clang::Expr]: 
+Assertion `Val && ""isa<> used on a null pointer""' failed.
+",https://github.com/llvm/llvm-project/issues/44080,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash with atomic constraints,"clang++: /root/llvm-project/clang/lib/AST/ASTContext.cpp:3442: 
+clang::QualType clang::ASTContext::getLValueReferenceType(clang::QualType, bool) const: 
+Assertion `(!T->isPlaceholderType() || T->isSpecificPlaceholderType(BuiltinType::UnknownAny)) && ""Unresolved placeholder type""' failed.)",https://github.com/llvm/llvm-project/issues/66612,,
+clang++,,1,,,,confirmed,Segmentation fault,Clang frontend C++ crash with capture-default in concept,"clang++: /root/llvm-project/llvm/include/llvm/ADT/SmallVector.h:294: 
+T& llvm::SmallVectorTemplateCommon<T, <template-parameter-1-2> >::operator[](llvm::SmallVectorTemplateCommon<T, <template-parameter-1-2> >::size_type) [with T = clang::sema::FunctionScopeInfo*; <template-parameter-1-2> = void; llvm::SmallVectorTemplateCommon<T, <template-parameter-1-2> >::reference = clang::sema::FunctionScopeInfo*&; llvm::SmallVectorTemplateCommon<T, <template-parameter-1-2> >::size_type = long unsigned int]: 
+Assertion `idx < size()' failed.",https://github.com/llvm/llvm-project/issues/66614,,
+clang++,1,1,,,,fixed,Segmentation fault,Clang frontend C++ crash with variadic templates in function args,"clang++: /root/llvm-project/llvm/include/llvm/Support/Casting.h:662: 
+decltype(auto) llvm::dyn_cast(From*) [with To = clang::BinaryOperator; From = const clang::Stmt]: 
+Assertion `detail::isPresent(Val) && ""dyn_cast on a non-existent value""' failed.",https://github.com/llvm/llvm-project/issues/67395,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,2,18,9,0,0,27,,,,,,

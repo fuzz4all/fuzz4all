@@ -1,0 +1,52 @@
+  ,fixed,confirmed,duplicated,unconfirmed,won't fix,status,symptom,short desc,long desc,reported to,,our version
+g++,,1,,,,confirmed,running time,repeatedly printing out error message,"error message repeatedly printed out when using -std=c++23, due to recursive templates",https://gcc.gnu.org/bugzilla/show_bug.cgi?id=109012,,
+g++,,1,,,,confirmed,internal compiler error ,decltype in lambda causes internal compiler error,invalid code in lambda where a combination of lambda and decltype leads to crashes (ICE-on-invalid),https://gcc.gnu.org/bugzilla/show_bug.cgi?id=109385,,
+g++,,,1,,,duplicated (fixed already in trunk),internal compiler error ," static_assert with operator""""s causes internal compiler error",,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=109459,,
+g++,,,1,,,duplicated,internal compiler error ,assign to default with three way comparison causes internal compiler error,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=109468,,
+g++,,,1,,,duplicated,internal compiler error ,internal compiler error in template,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=109859,,https://gcc.godbolt.org/z/cj7Yeaf5x
+g++,,1,,,,confirmed,running time,slow compilation on incorrect namespace ,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110028,,
+g++,,,,1,,,running time,recursive template leads to long compilation time,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110030,,
+g++,,2,,,,confirmed,internal compiler error ," non-type argument of dependent type in class template partial specialization, also accepts-invalid",,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110031,,2 bugs
+g++,,2,,,,confirmed,internal compiler error ,"auto in template argument causes ICE, also accepts-invalid ",,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110065,,2 bugs
+g++,1,1,,,,confirmed,internal compiler error ,ICE on noexcept(noexcept(...)) with optional,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110106,,
+g++,,,1,,,,internal compiler error ,ICE on invalid code with lambda,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110107,,
+g++,,,,1,,(compile time hog),running time,std::optional inside template leads to long compilation time ,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110150,,
+g++,,,1,,,duplicated,internal compiler error ,ICE on invalid: template constraint failure,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110212,,
+g++,,,,1,,,internal compiler error ,ICE on valid (decltype with lambda),,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110242,,
+g++,,,1,,,duplicated,internal compiler error ,types may not be defined in parameter types leads to ICE,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110397,,
+g++,,2,,,,confirmed,Segmentation fault,ICE on explicit instantiation of undefined template also accepts-invalid,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110409,,2 bugs
+g++,,2,,,,,Segmentation fault (optimization),ICE on constexpr initialized with non-constant expression also accepts-invalid,internal compiler error: verify_gimple failed,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110822,,2 bugs
+g++,,,1,,,,Segmentation fault (optimization),ICE on non-friend default operator overloading,,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=110837,,
+g++,,,1,,,duplicated,Segmentation fault,ICE on auto with may_alias attribute,"internal compiler error: in layout_type, at stor-layout.cc:2660",https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111169,,
+g++,,,1,,,duplicated,Segmentation fault,ICE with std::integral in template,"internal compiler error: in cp_parser_placeholder_type_specifier, at cp/parser.cc:20242",https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111220,,
+g++,,2,,,,confirmed,Segmentation fault,ICE on basic_string_view with missing template argument,"/opt/compiler-explorer/gcc-trunk-20230824/include/c++/14.0.0/string_view:165:16: internal compiler error: in add_outermost_template_args, at cp/pt.cc:617
+  165 |           && (!requires (_DRange& __d) {
+      |                ^~~~~~~~~~~~~~~~~~~~~~~~~
+  166 |                 __d.operator ::std::basic_string_view<_CharT, _Traits>();
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  167 |               })",https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111222,,2 bugs (targeted!)
+g++,,,1,,,duplicated,Segmentation fault,ICE: Internal Compiler Error in unify at cp/pt.c,"<source>:10:8: internal compiler error: in unify, at cp/pt.cc:24648",,,https://gcc.godbolt.org/z/T36oxcTMe
+g++,,,,1,, ,Segmentation fault,ICE on concept with undeclared identifier and unpermitted keyword,"0x251601e internal_error(char const*, ...)
+	???:0
+0xb66145 evaluate_concept_check(tree_node*)
+	???:0
+0xb57dda maybe_constant_value(tree_node*, tree_node*, mce_value)
+	???:0
+0xda11d4 store_init_value(tree_node*, tree_node*, vec<tree_node*, va_gc, vl_embed>**, int)
+	???:0
+0xbc9d2a cp_finish_decl(tree_node*, tree_node*, bool, tree_node*, int, cp_decomp*)
+	???:0
+0xccf024 c_parse_file()
+	???:0
+0xe11f49 c_common_parse_file()
+	???:0",https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111452,,
+g++,,,,1,,,Segmentation fault,ICE on concept with incorrectly ordered template parameter pack,"internal compiler error: in coerce_template_parms, at cp/pt.cc:9071",https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111453,,
+g++,,,1,,,duplicated,Segmentation fault,ICE on iostream as argument,iosfwd:146:41: internal compiler error: Segmentation fault,https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111596,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,1,14,11,5,0,30,,,,,,

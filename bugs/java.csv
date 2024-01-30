@@ -1,0 +1,33 @@
+sys,fixed,confirmed,duplicated,unconfirmed,won't fix,status,symptom,short desc,long desc,reported to,,our version
+javac,1,1,,0,,Fixed,crash,else followed by statement leads to crash,"An exception has occurred in the compiler (22-internal). Please file a bug against the Java compiler via the Java bug reporting page (https://bugreport.java.com) after checking the Bug Database (https://bugs.java.com) for duplicates. Include your program, the following diagnostic, and the parameters passed to the Java compiler in your report. Thank you.
+java.lang.AssertionError
+        at jdk.compiler/com.sun.tools.javac.parser.VirtualParser$VirtualScanner.errPos(VirtualParser.java:151)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.doRecover(JavacParser.java:3121)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.parseSimpleStatement(JavacParser.java:3090)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.blockStatement(JavacParser.java:2818)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.blockStatements(JavacParser.java:2755)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.block(JavacParser.java:2725)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.block(JavacParser.java:2739)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.methodDeclaratorRest(JavacParser.java:4897)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.topLevelMethodOrFieldDeclaration(JavacParser.java:4771)
+        at jdk.compiler/com.sun.tools.javac.parser.JavacParser.parseCompilationUnit(JavacParser.java:3988)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parse(JavaCompiler.java:652)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parse(JavaCompiler.java:629)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parse(JavaCompiler.java:689)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parseFiles(JavaCompiler.java:1045)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler$InitialFileParser.parse(JavaCompiler.java:1979)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.parseFiles(JavaCompiler.java:1032)
+        at jdk.compiler/com.sun.tools.javac.main.JavaCompiler.compile(JavaCompiler.java:951)
+        at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:319)
+        at jdk.compiler/com.sun.tools.javac.main.Main.compile(Main.java:178)
+        at jdk.compiler/com.sun.tools.javac.Main.compile(Main.java:66)
+        at jdk.compiler/com.sun.tools.javac.Main.main(Main.java:52)",https://bugs.openjdk.org/browse/JDK-8312204?jql=project%20%3D%20JDK%20AND%20status%20%3D%20Resolved%20AND%20affectedVersion%20%3D%20%2222%22%20AND%20component%20%3D%20tools%20AND%20text%20~%20%22an%20exception%22%20AND%20Subcomponent%20in%20(javac%2C%20javac%2C%20javac%2C%20javac),,
+javac,1,1,,,,Fixed,crash,compilation of sealed classes leads to infinite recursion,"The system is out of resources.
+Consult the following stack trace for details.
+java.lang.StackOverflowError
+	at jdk.compiler/com.sun.tools.javac.code.Types$12.visitClassType(Types.java:2173)",https://bugs.java.com/bugdatabase/view_bug?bug_id=JDK-8319987,,
+javac,0,1,,,,Fixed,crash,"compilation of cyclic hierarchy causes infinite recursion","The system is out of resources.
+Consult the following stack trace for details.
+java.lang.StackOverflowError
+	at jdk.compiler/com.sun.tools.javac.code.Types$12.visitClassType(Types.java:2173)",https://bugs.openjdk.org/browse/JDK-8320220,,
+,3,3,0,0,0,3,,,,,,

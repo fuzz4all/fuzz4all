@@ -1,0 +1,78 @@
+# This file includes the configuration parameters for the fuzzing approach
+
+# --------------------------------------------------------------------------- #
+# Configuration of the overall fuzzing setup
+fuzzing:
+  # number of fuzzing iterations
+  num: 10000
+  # total fuzzing time in hours
+  total_time: 24
+  # level of logging: 1 = INFO, 2 = TRACE, 3 = VERBOSE
+  log_level: 3
+  # use to validate fuzzing outputs on the fly.
+  # If flag not set then only generation will be done. (Default: false)
+  otf: true
+  # use to resume a previous fuzzing run.
+  # If flag not set then a new fuzzing run will be started (Default: false)
+  resume: true
+  # use to evaluate the fuzzing results.
+  # If flag not set then no evaluation will be done (Default: false)
+  evaluate: false
+  # use hand-written prompt to query the LLM model
+  use_hand_written_prompt: false
+  # whether to use only trigger_to_generate_input and input_hint, without the
+  # any documentation information or example code
+  no_input_prompt: false
+  # prompt strategy to generate obtain programs after the first one.
+  # 0: generate new code using separator
+  # 1: mutate existing code
+  # 2: semantically equivalent code generation
+  # 3: combine previous two code generations
+  prompt_strategy: 2
+
+
+# --------------------------------------------------------------------------- #
+# Configuration of the target system
+target:
+  # language to fuzz, currently supported: cpp, smt2, java, go
+  language: go
+  # path to documentation of the feature of the target system
+  # (Relative to the root of the fuzzing framework)
+  path_documentation: config/documentation/go/go_atomic.md
+  # path to the example code using the feature of the target system
+  # (Relative to the root of the fuzzing framework)
+  path_example_code:
+  # path to the command to push the llm to generate the input for the
+  # target system using the given feature
+  trigger_to_generate_input: "// Please create a very short program which combines atomic with other go features in a complex way"
+  # hint to give to the llm to generate the input for the target system
+  input_hint: 'package main\nimport (\n\t"sync/atomic"\n'
+  # path to the hand-written prompt to give to the llm
+  # (Relative to the root of the fuzzing framework)
+  path_hand_written_prompt:
+  # string to check if the generated input is valid. If the string is present
+  # in the generated input, the input is considered valid.
+  target_string: "atomic"
+
+
+# --------------------------------------------------------------------------- #
+# Configuration of the Large Language Model (LLM) setup
+llm:
+  # temperature to query the LLM model when generating output.
+  temperature: 1
+  # batch size
+  batch_size: 30
+  # use hardware acceleration (GPU) for the LLM model
+  device: cuda
+  # model name according to the HuggingFace model hub
+  # note that you can also export your cache such as this:
+  # export TRANSFORMERS_CACHE=/blabla/cache/
+  model_name: bigcode/starcoderbase
+  # local model folder (absolute path)
+  # if not set, the model will be downloaded from the HuggingFace model hub
+  # model_folder: /home/username/local_model_repository
+  # additional end of sequence tokens
+  # additional_eos_tokens:
+  #   - "<eom>"
+  # maximum length of the generated llm output
+  max_length: 1024
