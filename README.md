@@ -19,9 +19,7 @@ To realize this potential, we present a novel **autoprompting technique**, which
 that are well-suited for fuzzing, and a novel **LLM-powered fuzzing loop**, which iteratively updates 
 the prompt to create new fuzzing inputs.
 
-<p align="center">
-<img src="https://fuzz4all.github.io/static/images/overview.gif">
-<p>
+![](./resources/overview.gif)
 
 ## ⚡ Quick Start
 
