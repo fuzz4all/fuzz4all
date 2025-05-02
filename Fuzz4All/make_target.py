@@ -42,7 +42,7 @@ def make_target_with_config(config_dict: Dict[str, Any]) -> Target:
         "bs": llm.get("batch_size", 1),
         "temperature": llm.get("temperature", 1.0),
         "device": llm.get("device", "cuda"),
-        "model_name": llm.get("model_name", "bigcode/starcoder"),
+        "coder_name": llm.get("coder_name", "bigcode/starcoder"),
         "max_length": llm.get("max_length", 1024),
         "use_hw": fuzzing.get("use_hand_written_prompt", False),
         "no_input_prompt": fuzzing.get("no_input_prompt", False),

@@ -8,7 +8,7 @@ from typing import Any, Dict, List, Tuple, Union
 import torch
 from rich.progress import track
 
-from Fuzz4All.model import make_model
+from Fuzz4All.coder_LM import build_coder_LM
 from Fuzz4All.util.api_request import create_config, request_engine
 from Fuzz4All.util.Logger import LEVEL, Logger
 
@@ -37,7 +37,7 @@ class Target(object):
         self.temperature = kwargs["temperature"]
         self.max_length = kwargs["max_length"]
         self.device = kwargs["device"]
-        self.model_name = kwargs["model_name"]
+        self.coder_name = kwargs["coder_name"]
         self.model = None
         # loggers
         self.g_logger = Logger(self.folder, "log_generation.txt", level=kwargs["level"])
@@ -72,8 +72,8 @@ class Target(object):
         self.p_strategy = kwargs["prompt_strategy"]
         # eos based
         self.special_eos = None
-        if "model_name" in kwargs:
-            self.model_name = kwargs["model_name"]
+        if "coder_name" in kwargs:
+            self.coder_name = kwargs["coder_name"]
         if "target_name" in kwargs:
             self.target_name = kwargs["target_name"]
 
@@ -233,20 +233,20 @@ class Target(object):
         # if the config_dict is an attribute, add additional eos from config_dict
         # which might be model specific
         if hasattr(self, "config_dict"):
-            llm = self.config_dict["llm"]
-            model_name = llm["model_name"]
-            additional_eos = llm.get("additional_eos", [])
+            coder = self.config_dict["coder"]
+            coder_name = coder["coder_name"]
+            additional_eos = coder.get("additional_eos", [])
             if additional_eos:
                 eos = eos + additional_eos
         else:
-            model_name = self.model_name
+            coder_name = self.coder_name
 
         if self.special_eos is not None:
             eos = eos + [self.special_eos]
 
-        self.model = make_model(
+        self.model = build_coder_LM(
             eos=eos,
-            model_name=model_name,
+            coder_name=coder_name,
             device=self.device,
             max_length=self.max_length,
         )

@@ -20,7 +20,7 @@ fuzzing:
   # use to evaluate the fuzzing results.
   # If flag not set then no evaluation will be done (Default: false)
   evaluate: false
-  # use hand-written prompt to query the LLM model
+  # use hand-written prompt to query the coder model
   use_hand_written_prompt: false
   # whether to use only trigger_to_generate_input and input_hint, without the
   # any documentation information or example code
@@ -44,12 +44,12 @@ target:
   # path to the example code using the feature of the target system
   # (Relative to the root of the fuzzing framework)
   path_example_code:
-  # path to the command to push the llm to generate the input for the
+  # path to the command to push the coder to generate the input for the
   # target system using the given feature
   trigger_to_generate_input: "/* Please create a short program which combines typedef with new C features in a complex way */"
-  # hint to give to the llm to generate the input for the target system
+  # hint to give to the coder to generate the input for the target system
   input_hint: "#include <stdlib.h>"
-  # path to the hand-written prompt to give to the llm
+  # path to the hand-written prompt to give to the coder
   # (Relative to the root of the fuzzing framework)
   path_hand_written_prompt:
   # string to check if the generated input is valid. If the string is present
@@ -58,23 +58,23 @@ target:
 
 
 # --------------------------------------------------------------------------- #
-# Configuration of the Large Language Model (LLM) setup
-llm:
-  # temperature to query the LLM model when generating output.
+# Configuration of the Large Language Model (coder) setup
+coder:
+  # temperature to query the coder model when generating output.
   temperature: 1
   # batch size
   batch_size: 30
-  # use hardware acceleration (GPU) for the LLM model
+  # use hardware acceleration (GPU) for the coder model
   device: cuda
   # model name according to the HuggingFace model hub
   # note that you can also export your cache such as this:
   # export TRANSFORMERS_CACHE=/blabla/cache/
-  model_name: bigcode/starcoderbase
+  coder_name: bigcode/starcoderbase
   # local model folder (absolute path)
   # if not set, the model will be downloaded from the HuggingFace model hub
   # model_folder: /home/username/local_model_repository
   # additional end of sequence tokens
   # additional_eos_tokens:
   #   - "<eom>"
-  # maximum length of the generated llm output
+  # maximum length of the generated coder output
   max_length: 1024
