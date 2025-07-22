@@ -47,7 +47,13 @@ export FUZZING_BATCH_SIZE=30
 export FUZZING_MODEL="bigcode/starcoderbase"
 export FUZZING_DEVICE="gpu"
 ```
+or if you want to run Fuzz4All with local ollama mode:
+```bash
+export FUZZING_MODEL="ollama/starcoder"
+```
 
+if you want to use other model than starcoder, please change the name of model after `ollama/*`. 
+Make sure you have model locally pulled.
 The exact parameters will depend on the machine you are running `Fuzz4All` on.
 
 > [!Note]

@@ -78,3 +78,16 @@ llm:
   #   - "<eom>"
   # maximum length of the generated llm output
   max_length: 1024
+
+# --------------------------------------------------------------------------- #
+# Configuration for Ollama models
+ollama:
+  model_name: ollama/starcoder
+  temperature: 0.7
+  batch_size: 20
+  max_length: 512
+  device: gpu
+  additional_params:
+    top_k: 50
+    top_p: 0.95
+    repetition_penalty: 1.2
