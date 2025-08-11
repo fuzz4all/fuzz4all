@@ -14,17 +14,21 @@ from Fuzz4All.util.util import simple_parse
 
 try:
     import ollama
+
     HAS_OLLAMA = True
 except ImportError:
     HAS_OLLAMA = False
 
+
 def is_ollama_model(model_name: str) -> bool:
     return model_name.startswith("ollama/")
+
 
 def get_ollama_model_name(model_name: str) -> str:
     if is_ollama_model(model_name):
         return model_name.split("/", 1)[1]
     return model_name
+
 
 class FResult(Enum):
     SAFE = 1  # validation returns okay
@@ -190,7 +194,6 @@ class Target(object):
 
         return best_prompt
 
-
     def initialize(self):
         self.m_logger.logo(
             "Initializing ... this may take a while ...", level=LEVEL.INFO
@@ -219,7 +222,9 @@ class Target(object):
             self.backend = "ollama"
             self.ollama_model_name = get_ollama_model_name(model_name)
             self.model = None
-            self.m_logger.logo(f"Ollama model selected: {self.ollama_model_name}", level=LEVEL.INFO)
+            self.m_logger.logo(
+                f"Ollama model selected: {self.ollama_model_name}", level=LEVEL.INFO
+            )
         else:
             self.backend = "huggingface"
             self.model = make_model(
@@ -244,9 +249,9 @@ class Target(object):
         if getattr(self, "backend", None) == "ollama" and HAS_OLLAMA:
             response = ollama.chat(
                 model=self.ollama_model_name,
-                messages=[{'role': 'user', 'content': self.prompt}]
+                messages=[{"role": "user", "content": self.prompt}],
             )
-            content = response['message']['content']
+            content = response["message"]["content"]
             code = simple_parse(content)
             return [code if code else content]
         else:

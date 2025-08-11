@@ -1,5 +1,6 @@
 import os
 from typing import Any, Dict, List, Optional, Tuple, Union
+
 import torch
 from transformers import (
     AutoModelForCausalLM,
@@ -8,13 +9,16 @@ from transformers import (
     StoppingCriteriaList,
 )
 
+
 def is_ollama_model(model_name: str) -> bool:
     return model_name.startswith("ollama/")
+
 
 def get_ollama_model_name(model_name: str) -> str:
     if is_ollama_model(model_name):
         return model_name.split("/", 1)[1]
     return model_name
+
 
 def make_model(eos: list, model_name: str, device: str, max_length: int):
     if is_ollama_model(model_name):
@@ -26,6 +30,7 @@ def make_model(eos: list, model_name: str, device: str, max_length: int):
 torch.cuda.empty_cache()
 os.environ["TOKENIZERS_PARALLELISM"] = "false"  # disable warning
 EOF_STRINGS = ["<|endoftext|>", "###"]
+
 
 class EndOfFunctionCriteria(StoppingCriteria):
     def __init__(self, start_length, eos, tokenizer, *args, **kwargs):
@@ -64,6 +69,7 @@ class EndOfFunctionCriteria(StoppingCriteria):
                         )
             done.append(finished)
         return all(done)
+
 
 class StarCoder:
     def __init__(

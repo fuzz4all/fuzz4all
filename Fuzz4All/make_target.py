@@ -1,4 +1,5 @@
 from typing import Any, Dict
+
 from Fuzz4All.target.C.C import CTarget
 from Fuzz4All.target.CPP.CPP import CPPTarget
 from Fuzz4All.target.GO.GO import GOTarget
@@ -6,6 +7,8 @@ from Fuzz4All.target.JAVA.JAVA import JAVATarget
 from Fuzz4All.target.QISKIT.QISKIT import QiskitTarget
 from Fuzz4All.target.SMT.SMT import SMTTarget
 from Fuzz4All.target.target import Target
+
+
 def make_target(kwargs: Dict[str, Any]) -> Target:
     """Make a target from the given command line arguments."""
     language = kwargs.get("language", "cpp")
@@ -23,6 +26,7 @@ def make_target(kwargs: Dict[str, Any]) -> Target:
         return JAVATarget(**kwargs)
     else:
         raise ValueError(f"Invalid target {language}")
+
 
 def make_target_with_config(config_dict: Dict[str, Any]) -> Target:
     """Create a target from a configuration dictionary."""

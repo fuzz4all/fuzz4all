@@ -24,6 +24,7 @@ from Fuzz4All.util.util import load_config_file
 def is_ollama_model(model_name):
     return model_name.startswith("ollama/") or model_name in ["llama2", "starcoder"]
 
+
 def write_to_file(fo, file_name):
     try:
         with open(file_name, "w", encoding="utf-8") as f:
