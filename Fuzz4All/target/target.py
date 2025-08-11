@@ -9,9 +9,22 @@ import torch
 from rich.progress import track
 
 from Fuzz4All.model import make_model
-from Fuzz4All.util.api_request import create_config, request_engine
 from Fuzz4All.util.Logger import LEVEL, Logger
+from Fuzz4All.util.util import simple_parse
 
+try:
+    import ollama
+    HAS_OLLAMA = True
+except ImportError:
+    HAS_OLLAMA = False
+
+def is_ollama_model(model_name: str) -> bool:
+    return model_name.startswith("ollama/")
+
+def get_ollama_model_name(model_name: str) -> str:
+    if is_ollama_model(model_name):
+        return model_name.split("/", 1)[1]
+    return model_name
 
 class FResult(Enum):
     SAFE = 1  # validation returns okay
@@ -39,6 +52,7 @@ class Target(object):
         self.device = kwargs["device"]
         self.model_name = kwargs["model_name"]
         self.model = None
+        self.backend = "huggingface"
         # loggers
         self.g_logger = Logger(self.folder, "log_generation.txt", level=kwargs["level"])
         self.v_logger = Logger(self.folder, "log_validation.txt", level=kwargs["level"])
@@ -166,50 +180,9 @@ class Target(object):
             self.m_logger.logo("Use handwritten prompt ... ", level=LEVEL.INFO)
             best_prompt = self.wrap_prompt(kwargs["hw_prompt"])
         else:
-            self.m_logger.logo("Use auto-prompting prompt ... ", level=LEVEL.INFO)
-            message = kwargs["message"]
-            # first run with temperature 0.0 to get the first prompt
-            config = create_config(
-                {},
-                self._create_auto_prompt_message(message),
-                max_tokens=500,
-                temperature=0.0,
-                model="gpt-4",
+            raise NotImplementedError(
+                "Auto-prompting with API requests is disabled. Only Ollama/local models are supported."
             )
-            response = request_engine(config)
-            greedy_prompt = self.wrap_prompt(response.choices[0].message.content)
-            with open(
-                self.folder + "/prompts/greedy_prompt.txt", "w", encoding="utf-8"
-            ) as f:
-                f.write(greedy_prompt)
-            # repeated runs with temperature 1 to get additional prompts
-            # choose the prompt with max score
-            best_prompt, best_score = greedy_prompt, self.validate_prompt(greedy_prompt)
-            with open(self.folder + "/prompts/scores.txt", "a") as f:
-                f.write(f"greedy score: {str(best_score)}")
-            for i in track(range(3), description="Generating prompts..."):
-                config = create_config(
-                    {},
-                    self._create_auto_prompt_message(message),
-                    max_tokens=500,
-                    temperature=1,
-                    model="gpt-4",
-                )
-                response = request_engine(config)
-                prompt = self.wrap_prompt(response.choices[0].message.content)
-                with open(
-                    self.folder + "/prompts/prompt_{}.txt".format(i),
-                    "w",
-                    encoding="utf-8",
-                ) as f:
-                    f.write(prompt)
-                score = self.validate_prompt(prompt)
-                if score > best_score:
-                    best_score = score
-                    best_prompt = prompt
-                # dump score
-                with open(self.folder + "/prompts/scores.txt", "a") as f:
-                    f.write(f"\n{i} prompt score: {str(score)}")
 
         # dump best prompt
         with open(self.folder + "/prompts/best_prompt.txt", "w", encoding="utf-8") as f:
@@ -217,7 +190,7 @@ class Target(object):
 
         return best_prompt
 
-    # initialize through either some templates or auto-prompting to determine prompts
+
     def initialize(self):
         self.m_logger.logo(
             "Initializing ... this may take a while ...", level=LEVEL.INFO
@@ -230,8 +203,6 @@ class Target(object):
             self.m_prompt,
             self.c_prompt,
         ]
-        # if the config_dict is an attribute, add additional eos from config_dict
-        # which might be model specific
         if hasattr(self, "config_dict"):
             llm = self.config_dict["llm"]
             model_name = llm["model_name"]
@@ -244,13 +215,21 @@ class Target(object):
         if self.special_eos is not None:
             eos = eos + [self.special_eos]
 
-        self.model = make_model(
-            eos=eos,
-            model_name=model_name,
-            device=self.device,
-            max_length=self.max_length,
-        )
-        self.m_logger.logo("Model Loaded", level=LEVEL.INFO)
+        if HAS_OLLAMA and is_ollama_model(model_name):
+            self.backend = "ollama"
+            self.ollama_model_name = get_ollama_model_name(model_name)
+            self.model = None
+            self.m_logger.logo(f"Ollama model selected: {self.ollama_model_name}", level=LEVEL.INFO)
+        else:
+            self.backend = "huggingface"
+            self.model = make_model(
+                eos=eos,
+                model_name=model_name,
+                device=self.device,
+                max_length=self.max_length,
+            )
+            self.m_logger.logo("HuggingFace model loaded", level=LEVEL.INFO)
+
         self.initial_prompt = self.auto_prompt(
             message=self.prompt_used["docstring"],
             hw_prompt=self.prompt_used["hw_prompt"] if self.hw else None,
@@ -262,14 +241,22 @@ class Target(object):
 
     def generate_model(self) -> List[str]:
         self.g_logger.logo(self.prompt, level=LEVEL.VERBOSE)
-        return self.model.generate(
-            self.prompt,
-            batch_size=self.batch_size,
-            temperature=self.temperature,
-            max_length=1024,
-        )
+        if getattr(self, "backend", None) == "ollama" and HAS_OLLAMA:
+            response = ollama.chat(
+                model=self.ollama_model_name,
+                messages=[{'role': 'user', 'content': self.prompt}]
+            )
+            content = response['message']['content']
+            code = simple_parse(content)
+            return [code if code else content]
+        else:
+            return self.model.generate(
+                self.prompt,
+                batch_size=self.batch_size,
+                temperature=self.temperature,
+                max_length=1024,
+            )
 
-    # generation
     def generate(self, **kwargs) -> Union[List[str], bool]:
         try:
             fos = self.generate_model()

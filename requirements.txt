@@ -11,6 +11,9 @@ qiskit==0.43.1
 toml
 pyparsing
 fastcov
+genhtml
 matplotlib
 coverage==7.2.7
 pandas==2.0.3
+ollama
+requests
