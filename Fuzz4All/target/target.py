@@ -184,9 +184,21 @@ class Target(object):
             self.m_logger.logo("Use handwritten prompt ... ", level=LEVEL.INFO)
             best_prompt = self.wrap_prompt(kwargs["hw_prompt"])
         else:
-            raise NotImplementedError(
-                "Auto-prompting with API requests is disabled. Only Ollama/local models are supported."
-            )
+            # Check if we are running an Ollama model and use it to auto-prompt
+            if getattr(self, "backend", None) == "ollama" and HAS_OLLAMA:
+                self.m_logger.logo("Generating auto-prompt via Ollama...", level=LEVEL.INFO)
+                
+                messages = self._create_auto_prompt_message(kwargs.get("message", ""))
+                response = ollama.chat(
+                    model=self.ollama_model_name,
+                    messages=messages,
+                )
+                raw_prompt = response["message"]["content"]
+                best_prompt = self.wrap_prompt(raw_prompt)
+            else:
+                raise NotImplementedError(
+                    "Auto-prompting with API requests is disabled. Only Ollama/local models are supported."
+                )
 
         # dump best prompt
         with open(self.folder + "/prompts/best_prompt.txt", "w", encoding="utf-8") as f:
@@ -247,10 +259,22 @@ class Target(object):
     def generate_model(self) -> List[str]:
         self.g_logger.logo(self.prompt, level=LEVEL.VERBOSE)
         if getattr(self, "backend", None) == "ollama" and HAS_OLLAMA:
-            response = ollama.chat(
-                model=self.ollama_model_name,
-                messages=[{"role": "user", "content": self.prompt}],
-            )
+            if "cloud" in self.ollama_model_name:
+                from ollama import Client
+                cloud_client = Client(
+                    host="https://ollama.com",
+                    headers={'Authorization': 'Bearer ' + os.environ.get('OLLAMA_API_KEY')}
+                )
+                response = cloud_client.chat(
+                    model=self.ollama_model_name,
+                    messages=[{"role": "user", "content": self.prompt}],
+                )
+                
+            else:
+                response = ollama.chat(
+                    model=self.ollama_model_name,
+                    messages=[{"role": "user", "content": self.prompt}],
+                )
             content = response["message"]["content"]
             code = simple_parse(content)
             return [code if code else content]
