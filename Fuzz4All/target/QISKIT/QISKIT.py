@@ -53,9 +53,22 @@ try:
             # print(res.draw())
 
     # conert them to qasm and back
+    from qiskit import qasm3, qasm2
     for circuit in circuits:
         # print(f"Converting to qasm and back for circuit {circuit.name}")
-        QuantumCircuit().from_qasm_str(circuit.qasm())
+        try:
+            # Try QASM 2 first
+            qasm_string = qasm2.dumps(circuit)
+            new_circuit = qasm2.loads(qasm_string)
+        except TypeError:
+            # Fallback to QASM 3 if Qwen generated array-based parameters
+            try:
+                qasm_string = qasm3.dumps(circuit)
+                new_circuit = qasm3.loads(qasm_string)
+            except Exception as e:
+                raise CustomFuzzAllException(e)
+        except Exception as e:
+            raise CustomFuzzAllException(e)
 except Exception as e:
     raise CustomFuzzAllException(e)
 # ==================== ORACLE ====================
